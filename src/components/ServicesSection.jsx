@@ -1,99 +1,63 @@
-import React, { useState } from 'react';
-import { SERVICES, COMPANY_INFO } from '../data/servicesData';
-import { CheckCircle2, MessageSquare, Shield, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { HOME_SERVICES } from '../data/servicesData';
+import { ArrowRight } from 'lucide-react';
 
-export default function ServicesSection() {
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  const filteredServices = activeFilter === 'all' 
-    ? SERVICES 
-    : SERVICES.filter(s => {
-        if (activeFilter === 'residencial') return s.id === 'barrios-privados';
-        if (activeFilter === 'comercial') return s.id === 'empresas-comercios';
-        if (activeFilter === 'eventos') return s.id === 'entes-publicos-eventos';
-        if (activeFilter === 'tecnologia') return s.id === 'tecnologia-vigilancia';
-        return true;
-      });
-
+// Sección 2 de INICIO: "Nuestros Servicios" con las 3 tarjetas e imágenes originales
+export default function ServicesSection({ onNavigate }) {
   return (
-    <section id="servicios" className="section" style={{
-      background: 'linear-gradient(180deg, #060907 0%, #0a110c 50%, #060907 100%)'
-    }}>
+    <section
+      id="nuestros-servicios"
+      style={{
+        background: 'var(--bg-pure-black)',
+        padding: '5rem 0'
+      }}
+    >
       <div className="container">
-        {/* Encabezado de Sección */}
-        <div className="section-title-wrap">
-          <span className="section-tag">
-            <Shield size={16} />
-            Especialización Operativa
-          </span>
-          <h2 className="section-title">
-            Nuestros <span className="gradient-text-green">Servicios de Seguridad</span>
-          </h2>
-          <p className="section-subtitle">
-            Soluciones de custodia, patrullaje y control de acceso adaptadas a los estándares más exigentes del sector residencial, comercial e institucional.
-          </p>
-
-          {/* Filtros de Categorías */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '0.6rem',
-            flexWrap: 'wrap',
-            marginTop: '2rem'
+        {/* Encabezado y separador amarillo original */}
+        <div style={{ textAlign: 'center', marginBottom: '3.2rem' }}>
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+            fontWeight: 900,
+            color: '#ffffff',
+            textTransform: 'uppercase',
+            letterSpacing: '-0.02em',
+            marginBottom: '1rem'
           }}>
-            {[
-              { id: 'all', label: 'Todos los Servicios' },
-              { id: 'residencial', label: 'Barrios Privados' },
-              { id: 'comercial', label: 'Empresas y Comercios' },
-              { id: 'eventos', label: 'Entes Públicos & Eventos' },
-              { id: 'tecnologia', label: 'Vigilancia Tecnológica' }
-            ].map(f => (
-              <button
-                key={f.id}
-                onClick={() => setActiveFilter(f.id)}
-                style={{
-                  background: activeFilter === f.id ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.05)',
-                  color: activeFilter === f.id ? '#041208' : '#c3d4c6',
-                  border: activeFilter === f.id ? '1px solid var(--color-primary)' : '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: 'var(--radius-full)',
-                  padding: '0.5rem 1.2rem',
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  transition: 'all 0.25s ease'
-                }}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+            Nuestros Servicios
+          </h2>
+          <div style={{
+            width: '120px',
+            height: '4px',
+            background: 'var(--color-brand-yellow)',
+            margin: '0 auto',
+            borderRadius: 'var(--radius-full)'
+          }}></div>
         </div>
 
-        {/* Grilla de Servicios */}
+        {/* Grilla de las 3 tarjetas originales */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2.5rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+          gap: '2rem',
+          alignItems: 'stretch'
         }}>
-          {filteredServices.map((service) => (
-            <div
+          {HOME_SERVICES.map((service) => (
+            <article
               key={service.id}
               className="glass-panel"
               style={{
-                display: 'flex',
-                flexDirection: 'column',
+                background: '#0c120d',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
                 overflow: 'hidden',
-                background: 'rgba(14, 22, 16, 0.75)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                position: 'relative'
+                display: 'flex',
+                flexDirection: 'column'
               }}
             >
-              {/* Contenedor de Imagen con Overlay y Badge */}
               <div style={{
-                position: 'relative',
-                height: '240px',
+                width: '100%',
+                aspectRatio: '4 / 3',
                 overflow: 'hidden',
-                background: '#0a100b'
+                background: '#080d06'
               }}>
                 <img
                   src={service.image}
@@ -102,129 +66,65 @@ export default function ServicesSection() {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    transition: 'transform 0.6s ease'
+                    objectPosition: 'center top',
+                    transition: 'transform 0.5s ease'
                   }}
-                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.08)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                 />
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(6,9,7,0.85) 100%)'
-                }}></div>
-
-                <div style={{
-                  position: 'absolute',
-                  top: '15px',
-                  left: '15px'
-                }}>
-                  <span className="glass-badge" style={{
-                    background: 'rgba(5, 18, 10, 0.85)',
-                    backdropFilter: 'blur(8px)',
-                    fontSize: '0.75rem'
-                  }}>
-                    {service.badge}
-                  </span>
-                </div>
               </div>
 
-              {/* Contenido de la Tarjeta */}
               <div style={{
-                padding: '2rem',
+                padding: '1.8rem 1.6rem 2rem 1.6rem',
+                textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                flexGrow: 1
+                flexGrow: 1,
+                gap: '0.85rem'
               }}>
                 <h3 style={{
-                  fontSize: '1.45rem',
-                  fontWeight: 800,
-                  marginBottom: '0.5rem',
-                  color: '#ffffff'
+                  fontSize: '1.35rem',
+                  fontWeight: 900,
+                  color: 'var(--color-forest-accent)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.02em'
                 }}>
                   {service.title}
                 </h3>
-
                 <p style={{
-                  fontSize: '0.92rem',
-                  color: '#00e676',
-                  fontWeight: 600,
-                  marginBottom: '1rem'
+                  color: '#f2f5f3',
+                  fontSize: '0.96rem',
+                  lineHeight: 1.65,
+                  fontWeight: 500
                 }}>
-                  {service.tagline}
+                  {service.description}
                 </p>
-
-                <p style={{
-                  fontSize: '0.92rem',
-                  color: '#9db3a2',
-                  lineHeight: 1.6,
-                  marginBottom: '1.5rem'
-                }}>
-                  {service.summary}
-                </p>
-
-                {/* Lista de Features con Checks */}
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.65rem',
-                  marginBottom: '2rem',
-                  flexGrow: 1
-                }}>
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '0.6rem',
-                      fontSize: '0.88rem',
-                      color: '#cdddd1'
-                    }}>
-                      <CheckCircle2 size={16} color="#00e676" style={{ marginTop: '3px', flexShrink: 0 }} />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Acciones de la Tarjeta */}
-                <div style={{
-                  display: 'flex',
-                  gap: '0.8rem',
-                  marginTop: 'auto',
-                  paddingTop: '1.2rem',
-                  borderTop: '1px solid rgba(255, 255, 255, 0.08)'
-                }}>
-                  <a
-                    href={`https://wa.me/${COMPANY_INFO.phoneRaw}?text=Hola,%20solicito%20presupuesto%20y%20asesoramiento%20para%20el%20servicio%20de%20*${encodeURIComponent(service.title)}*.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-whatsapp"
-                    style={{
-                      flex: 1,
-                      fontSize: '0.88rem',
-                      padding: '0.75rem 1rem'
-                    }}
-                  >
-                    <MessageSquare size={16} />
-                    <span>Consultar Ahora</span>
-                  </a>
-
-                  <a
-                    href="#cotizador"
-                    className="btn btn-secondary"
-                    style={{
-                      padding: '0.75rem 1rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    title="Cotizar en vivo"
-                  >
-                    <ArrowUpRight size={18} />
-                  </a>
-                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
+
+        {/* Acceso directo a la pestaña SERVICIOS */}
+        {onNavigate && (
+          <div style={{ textAlign: 'center', marginTop: '2.8rem' }}>
+            <button
+              type="button"
+              onClick={() => {
+                onNavigate('servicios');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="btn"
+              style={{
+                background: 'var(--color-brand-yellow)',
+                color: '#080d06',
+                fontWeight: 900,
+                padding: '0.9rem 2rem',
+                boxShadow: '0 6px 22px rgba(229, 230, 0, 0.25)'
+              }}
+            >
+              <span>Ver Todos los Servicios</span>
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

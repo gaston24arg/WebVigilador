@@ -6,34 +6,42 @@
   --font-heading: 'Outfit', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Colores Corporativos Tácticos y Modernos */
+  /* Colores corporativos oficiales de SHERIFF Seguridad */
   --color-primary: #00e676;
   --color-primary-hover: #00c853;
   --color-primary-glow: rgba(0, 230, 118, 0.35);
-  
+
+  --color-brand-yellow: #e5e600;
   --color-accent-gold: #ffd600;
   --color-accent-yellow: #e5e600;
   --color-tactical-green: #0d5f3a;
   --color-tactical-dark: #052616;
+  --color-olive-bg: #1b3014;
+  --color-olive-deep: #1b3016;
+  --color-forest-card: #024427;
+  --color-forest-split: #0a4028;
+  --color-forest-accent: #5cb848;
+  --color-danger-text: #ff6b6b;
 
-  /* Fondos y Superficies Dark Mode Premium */
-  --bg-black: #060907;
+  /* Fondos y superficies en modo oscuro */
+  --bg-black: #080d06;
+  --bg-pure-black: #000000;
   --bg-darker: #0b110d;
   --bg-dark: #101813;
-  --bg-surface: rgba(18, 27, 21, 0.72);
-  --bg-surface-hover: rgba(26, 38, 30, 0.85);
-  --bg-glass: rgba(14, 22, 16, 0.65);
+  --bg-surface: rgba(18, 27, 21, 0.78);
+  --bg-surface-hover: rgba(26, 38, 30, 0.9);
+  --bg-glass: rgba(14, 22, 16, 0.72);
   
-  /* Bordes y Divisiones */
+  /* Bordes y divisiones */
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-glow: rgba(0, 230, 118, 0.25);
   --border-active: rgba(0, 230, 118, 0.6);
 
-  /* Texto y Contrastes */
+  /* Texto y contrastes */
   --text-white: #ffffff;
   --text-primary: #f2f5f3;
-  --text-secondary: #a3b3a6;
-  --text-muted: #6f8072;
+  --text-secondary: #b5c7b8;
+  --text-muted: #8ea392;
   --text-gold: #ffd700;
 
   /* Sombras y Efectos */
@@ -55,11 +63,17 @@
   --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset y Base */
+/* Reinicio y estilos base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Indicador de foco visible de alto contraste para accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 html {
@@ -132,7 +146,7 @@ img, video {
   padding: 0 1.5rem;
 }
 
-/* Glassmorphism Classes */
+/* Clases de efecto cristal (glassmorphism) */
 .glass-panel {
   background: var(--bg-surface);
   backdrop-filter: blur(14px);
@@ -323,7 +337,7 @@ img, video {
   line-height: 1.7;
 }
 
-/* Grid Utilities */
+/* Utilidades de grilla */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -345,5 +359,15 @@ img, video {
 @media (max-width: 992px) {
   .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Respeto a la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

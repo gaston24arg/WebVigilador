@@ -35,7 +35,7 @@ export default function WhatsAppWidget() {
           overflow: 'hidden',
           animation: 'fadeInUp 0.25s ease'
         }}>
-          {/* Header del Widget */}
+          {/* Encabezado del widget */}
           <div style={{
             background: 'linear-gradient(135deg, #0d5f3a 0%, #052616 100%)',
             padding: '1.2rem',
@@ -64,7 +64,9 @@ export default function WhatsAppWidget() {
             </div>
 
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
+              aria-label="Cerrar menú de WhatsApp"
               style={{
                 background: 'transparent',
                 border: 'none',
@@ -145,6 +147,7 @@ export default function WhatsAppWidget() {
 
       {/* Botón Principal Flotante */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         style={{
           width: '60px',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Phone, MessageSquare, Menu, X, ArrowRight } from 'lucide-react';
+import { Phone, MessageSquare, Menu, X } from 'lucide-react';
 import { COMPANY_INFO } from '../data/servicesData';
 
 export default function Navbar({ activeTab, onSelectTab }) {
@@ -14,12 +14,13 @@ export default function Navbar({ activeTab, onSelectTab }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Pestañas exactas del sitio original en el mismo orden
   const navTabs = [
-    { id: 'inicio', name: 'Inicio' },
-    { id: 'servicios', name: 'Servicios' },
-    { id: 'capacitaciones', name: 'Capacitaciones' },
-    { id: 'acerca-de', name: 'Acerca de' },
-    { id: 'contacto', name: 'Contacto' }
+    { id: 'inicio', name: 'INICIO' },
+    { id: 'servicios', name: 'SERVICIOS' },
+    { id: 'capacitaciones', name: 'CAPACITACIONES' },
+    { id: 'acerca-de', name: 'ACERCA DE' },
+    { id: 'contacto', name: 'CONTACTOS' }
   ];
 
   const handleTabClick = (tabId) => {
@@ -30,13 +31,13 @@ export default function Navbar({ activeTab, onSelectTab }) {
 
   return (
     <>
-      {/* Top Banner de Guardia Activa */}
+      {/* Barra superior institucional con habilitación y guardia 24/7 */}
       <div style={{
-        background: 'linear-gradient(90deg, #051d10 0%, #0d3822 50%, #051d10 100%)',
-        borderBottom: '1px solid rgba(0, 230, 118, 0.25)',
+        background: 'linear-gradient(90deg, #080d06 0%, #1b3014 50%, #080d06 100%)',
+        borderBottom: '1px solid rgba(229, 230, 0, 0.22)',
         padding: '0.45rem 1rem',
-        fontSize: '0.8rem',
-        color: '#c2d4c6',
+        fontSize: '0.78rem',
+        color: '#d8e3da',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -47,43 +48,43 @@ export default function Navbar({ activeTab, onSelectTab }) {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
           <span className="pulse-indicator"></span>
-          <span style={{ color: '#00e676', fontWeight: 700 }}>GUARDIA OPERATIVA 24/7</span>
-          <span style={{ opacity: 0.5 }}>|</span>
+          <span style={{ color: 'var(--color-brand-yellow)', fontWeight: 800 }}>GUARDIA OPERATIVA 24/7</span>
+          <span style={{ opacity: 0.45 }}>|</span>
           <span>{COMPANY_INFO.resolutionNumber} &bull; Neuquén</span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a 
-            href={`tel:${COMPANY_INFO.phoneRaw}`} 
-            style={{ color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600 }}
-          >
-            <Phone size={13} color="#00e676" />
-            <span>{COMPANY_INFO.phone}</span>
-          </a>
-        </div>
+        <a
+          href={`tel:${COMPANY_INFO.phoneRaw}`}
+          style={{ color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 700 }}
+        >
+          <Phone size={13} color="#e5e600" />
+          <span>{COMPANY_INFO.phone}</span>
+        </a>
       </div>
 
-      {/* Main Navbar */}
+      {/* Barra de navegación principal con logo circular original y 5 pestañas */}
       <header style={{
         position: 'sticky',
         top: 0,
         zIndex: 100,
         transition: 'all 0.3s ease',
-        background: isScrolled ? 'rgba(8, 12, 9, 0.95)' : 'rgba(8, 12, 9, 0.82)',
+        background: isScrolled ? 'rgba(8, 13, 6, 0.96)' : 'rgba(8, 13, 6, 0.84)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(0, 230, 118, 0.2)',
-        boxShadow: isScrolled ? '0 10px 30px rgba(0,0,0,0.8)' : 'none'
+        borderBottom: '1px solid rgba(229, 230, 0, 0.2)',
+        boxShadow: isScrolled ? '0 10px 30px rgba(0, 0, 0, 0.75)' : 'none'
       }}>
         <div className="container" style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingTop: '0.75rem',
-          paddingBottom: '0.75rem'
+          paddingTop: '0.7rem',
+          paddingBottom: '0.7rem',
+          gap: '1rem'
         }}>
-          {/* Logo Brand */}
+          {/* Logotipo oficial circular de SHERIFF */}
           <button
+            type="button"
             onClick={() => handleTabClick('inicio')}
             style={{
               background: 'transparent',
@@ -91,37 +92,37 @@ export default function Navbar({ activeTab, onSelectTab }) {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.9rem',
+              gap: '0.85rem',
               textAlign: 'left',
               padding: 0
             }}
           >
-            <img 
-              src="/assets/images/logo.png" 
-              alt="SHERIFF Seguridad" 
+            <img
+              src={COMPANY_INFO.logoHeader}
+              alt="SHERIFF Seguridad S.R.L."
               style={{
-                height: '52px',
+                height: '56px',
                 width: 'auto',
-                filter: 'drop-shadow(0 2px 10px rgba(0, 230, 118, 0.35))'
+                filter: 'drop-shadow(0 2px 10px rgba(229, 230, 0, 0.25))'
               }}
-              onError={(e) => { e.target.src = '/assets/images/icon.png'; }}
+              onError={(e) => { e.currentTarget.src = '/assets/images/icon.png'; }}
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1.25rem',
+                fontSize: '1.2rem',
                 fontWeight: 900,
                 letterSpacing: '0.08em',
                 color: '#ffffff',
-                lineHeight: 1.1
+                lineHeight: 1.05
               }}>
                 SHERIFF
               </span>
               <span style={{
                 fontSize: '0.68rem',
                 fontWeight: 800,
-                letterSpacing: '0.22em',
-                color: '#00e676',
+                letterSpacing: '0.2em',
+                color: 'var(--color-brand-yellow)',
                 textTransform: 'uppercase'
               }}>
                 SEGURIDAD S.R.L.
@@ -129,41 +130,41 @@ export default function Navbar({ activeTab, onSelectTab }) {
             </div>
           </button>
 
-          {/* Desktop Tabs */}
-          <nav style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            background: 'rgba(255, 255, 255, 0.04)',
-            padding: '0.3rem 0.5rem',
-            borderRadius: 'var(--radius-full)',
-            border: '1px solid rgba(255, 255, 255, 0.08)'
-          }} className="desktop-nav">
+          {/* Pestañas de escritorio */}
+          <nav
+            aria-label="Navegación principal del sitio"
+            className="desktop-nav"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              background: 'rgba(255, 255, 255, 0.04)',
+              padding: '0.3rem 0.45rem',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid rgba(255, 255, 255, 0.09)'
+            }}
+          >
             {navTabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
+                  type="button"
+                  aria-current={isActive ? 'page' : undefined}
                   onClick={() => handleTabClick(tab.id)}
                   style={{
-                    background: isActive ? 'var(--color-primary)' : 'transparent',
-                    color: isActive ? '#041208' : '#d2e3d5',
+                    background: isActive ? 'var(--color-brand-yellow)' : 'transparent',
+                    color: isActive ? '#080d06' : '#f2f5f3',
                     border: 'none',
                     borderRadius: 'var(--radius-full)',
-                    padding: '0.45rem 1.1rem',
-                    fontSize: '0.85rem',
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.82rem',
                     fontWeight: 800,
                     cursor: 'pointer',
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
-                    transition: 'all 0.25s ease',
-                    boxShadow: isActive ? '0 2px 12px rgba(0, 230, 118, 0.4)' : 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) e.target.style.color = '#00e676';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) e.target.style.color = '#d2e3d5';
+                    transition: 'all 0.2s ease',
+                    boxShadow: isActive ? '0 2px 14px rgba(229, 230, 0, 0.35)' : 'none'
                   }}
                 >
                   {tab.name}
@@ -172,29 +173,34 @@ export default function Navbar({ activeTab, onSelectTab }) {
             })}
           </nav>
 
-          {/* Desktop Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }} className="desktop-actions">
+          {/* Botón WhatsApp del encabezado (funcional) */}
+          <div className="desktop-actions" style={{ display: 'flex', alignItems: 'center' }}>
             <a
-              href={`https://wa.me/${COMPANY_INFO.phoneRaw}?text=Hola,%20deseo%20solicitar%20asesoramiento%20de%20seguridad%20para%20mis%20instalaciones.`}
+              href={COMPANY_INFO.whatsappDefaultUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-whatsapp"
+              className="btn"
               style={{
-                padding: '0.65rem 1.25rem',
-                fontSize: '0.85rem'
+                background: 'transparent',
+                border: '2px solid var(--color-brand-yellow)',
+                color: 'var(--color-brand-yellow)',
+                padding: '0.55rem 1.15rem',
+                fontSize: '0.82rem',
+                fontWeight: 800
               }}
             >
               <MessageSquare size={16} />
-              <span>WhatsApp</span>
+              <span>WHATSAPP</span>
             </a>
           </div>
 
-          {/* Mobile Menu Trigger */}
+          {/* Botón del menú móvil */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
               color: '#ffffff',
               padding: '0.55rem',
               borderRadius: 'var(--radius-sm)',
@@ -202,36 +208,38 @@ export default function Navbar({ activeTab, onSelectTab }) {
               display: 'none'
             }}
             className="mobile-trigger"
-            aria-label="Toggle Menu"
+            aria-label="Abrir o cerrar menú de navegación"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Menú desplegable móvil */}
         {mobileMenuOpen && (
           <div style={{
-            background: 'rgba(8, 12, 9, 0.98)',
-            borderTop: '1px solid rgba(0, 230, 118, 0.2)',
-            padding: '1.5rem',
+            background: 'rgba(8, 13, 6, 0.98)',
+            borderTop: '1px solid rgba(229, 230, 0, 0.25)',
+            padding: '1.25rem 1.5rem 1.5rem 1.5rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.8rem',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.8)'
+            gap: '0.65rem',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.85)'
           }}>
             {navTabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
+                  type="button"
                   onClick={() => handleTabClick(tab.id)}
                   style={{
-                    background: isActive ? 'rgba(0, 230, 118, 0.15)' : 'transparent',
-                    border: isActive ? '1px solid var(--color-primary)' : '1px solid transparent',
-                    color: isActive ? '#00e676' : '#ffffff',
+                    background: isActive ? 'rgba(229, 230, 0, 0.16)' : 'transparent',
+                    border: isActive ? '1px solid var(--color-brand-yellow)' : '1px solid transparent',
+                    color: isActive ? 'var(--color-brand-yellow)' : '#ffffff',
                     padding: '0.75rem 1rem',
                     borderRadius: 'var(--radius-sm)',
-                    fontSize: '1rem',
+                    fontSize: '0.95rem',
                     fontWeight: 800,
                     textAlign: 'left',
                     textTransform: 'uppercase',
@@ -242,14 +250,14 @@ export default function Navbar({ activeTab, onSelectTab }) {
                   }}
                 >
                   <span>{tab.name}</span>
-                  {isActive && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00e676' }}></span>}
+                  {isActive && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-brand-yellow)' }}></span>}
                 </button>
               );
             })}
 
             <div style={{ paddingTop: '0.8rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
               <a
-                href={`https://wa.me/${COMPANY_INFO.phoneRaw}?text=Hola,%20deseo%20solicitar%20asesoramiento%20de%20seguridad.`}
+                href={COMPANY_INFO.whatsappDefaultUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp"
@@ -264,7 +272,7 @@ export default function Navbar({ activeTab, onSelectTab }) {
       </header>
 
       <style>{`
-        @media (max-width: 960px) {
+        @media (max-width: 980px) {
           .desktop-nav, .desktop-actions {
             display: none !important;
           }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calculator, Shield, MessageSquare, Check, Sparkles, AlertCircle } from 'lucide-react';
+import { Calculator, Shield, MessageSquare, Sparkles } from 'lucide-react';
 import { COMPANY_INFO } from '../data/servicesData';
 import confetti from 'canvas-confetti';
 
@@ -52,7 +52,7 @@ export default function QuoteCalculator() {
     ];
 
     const encoded = encodeURIComponent(lines.join('\n'));
-    window.open(`https://wa.me/${COMPANY_INFO.phoneRaw}?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/${COMPANY_INFO.phoneRaw}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
